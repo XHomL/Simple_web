@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Blank | Creative - Bootstrap 3 Responsive Admin Template</title>
+
+    <!-- Bootstrap CSS -->    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+      <script src="/js/respond.min.js"></script>
+      <script src="/js/lte-ie7.js"></script>
+      <![endif]-->
+	<style type="text/css">
+		*{padding:0;margin:0;}
+        .con{width:1000px;margin:0 auto;border:1px solid #ccc;padding:10px 0;}
+		.con:after{clear:both;display:block;width:0;height:0;content:""}
+		.pic{width:200px;height:200px;float:left;border:1px solid #ccc}
+		.pic img{width:200px;height:200px;}
+		.cent{float:left;width:700px;margin-left:90px;font-size:20px;}
+	</style>
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link type="text/css" rel="stylesheet" href="/css/style.css">
+
+  </head>
+
+  <body>
+  <!-- container section start -->
+  <section id="container" class="">
+      <!--header start-->
+      
+      <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
+
+            <!--logo start-->
+            <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">                    
+                    <li>
+                        <form class="navbar-form">
+                            <input class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>                    
+                </ul>
+                <!--  search form end -->                
+            </div>
+
+            <div class="top-nav notification-row">                
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    
+                    <!-- task notificatoin start -->
+                    <li id="task_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="icon-task-l"></span>
+                        </a>
+                    </li>
+                    <!-- task notificatoin end -->
+					
+                    <!-- inbox notificatoin start-->
+                    <li id="mail_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-envelope-l"></i>
+                        </a>
+                    </li>
+                    <!-- inbox notificatoin end -->
+					
+                    <!-- alert notification start-->
+                    <li id="alert_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-bell-l"></i>
+                        </a> 
+                    </li>
+                    <!-- alert notification end-->
+					
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="/imgs/avatar1_small.jpg">
+                            </span>
+                            <span class="username">Jenifer Smith</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li class="eborder-top">
+                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_chat_alt"></i> Chats</a>
+                            </li>
+                            <li>
+                                <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                            </li>
+                            <li>
+                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                            </li>
+                            <li>
+                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+      </header>      
+      <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu">                
+                  <li class="">
+                      <a class="" href="index.html">
+                          <i class="icon_house_alt"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+				  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_document_alt"></i>
+                          <span>用户管理</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a class="" href="admin_user">普通用户</a></li>
+                          <li><a class="" href="admin_manager">管理用户</a></li>
+                      </ul>
+                  </li>       
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_desktop"></i>
+                          <span>商品管理</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a class="" href="admin_virtual_flowers">虚拟鲜花</a></li>
+                          <li><a class="" href="admin_flowers">实物鲜花</a></li>
+                          <li><a class="" href="admin_gifts">实际礼品</a></li>
+                      </ul>
+                  </li>
+                  <li>
+                      <a class="" href="admin_order">
+                          <i class="icon_genius"></i>
+                          <span>订单管理</span>
+                      </a>
+                  </li>
+                  <li>                     
+                      <a class="" href="admin_pay">
+                          <i class="icon_piechart"></i>
+                          <span>花芽购买管理</span> 
+                      </a>                   
+                  </li>
+                             
+                  <li>
+                      <a class="" href="admin_withdrawal">
+                          <i class="icon_table"></i>
+                          <span>花芽提现管理</span>
+                      </a>
+                  </li>
+                  
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_documents_alt"></i>
+                          <span>Pages</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">                          
+                          <li><a class="" href="admin_login"><span>Login Page</span></a></li>e
+                          <li><a class="" href="404">404 Error</a></li>
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+		  <div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header"><i class="fa fa fa-bars"></i> Pages</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+						<li><i class="fa fa-bars"></i>Pages</li>
+						<li><i class="fa fa-square-o"></i>Pages</li>
+					</ol>
+				</div>
+			</div>
+              <!-- page start-->
+			
+			<div class="row">
+					<div class="col-lg-12">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              虚拟商品
+                          </header>
+						  <div class="table-responsive">
+                          <table class="table" id="table">
+                            <thead>
+                              <tr>
+								 <th EditType="TextBox">图片</th>
+								 <th EditType="TextBox">名称</th>
+								 <th EditType="TextBox">价格</th>
+								 <th EditType="TextBox">含义</th>
+                                 <th EditType="TextBox">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+								 <td><div class="pic"><img src="/imgs/flowers/lily1.jpg"></div></td>
+								 <td>百合</td>
+								 <td>15</td>
+								 <td>顺利、心想事成、友情、祝福、高贵 、百年好合</td>
+                                 <td>
+								  <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changePicture(this)">更改图片</a>
+							      <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changeCurrentRow(this)">修改</a>
+							      <a href="#myModal" data-toggle="modal-1" class="btn btn-warning" onclick="submiCurrentRow(this)">提交</a>
+							      <a href="#myModal" data-toggle="modal-2" class="btn btn-danger" onclick="deleteCurrentRow(this)">删除</a>
+								 </td>
+                              </tr>
+							  <tr>
+								 <td><div class="pic"><img src="/imgs/flowers/peony.jpg"></div></td>
+								 <td>牡丹</td>
+								 <td>30</td>
+								 <td>圆满、浓情、富贵、雍容华贵</td>
+                                 <td>
+								 <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changePicture(this)">更改图片</a>
+							      <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changeCurrentRow(this)">修改</a>
+							      <a href="#myModal" data-toggle="modal-1" class="btn btn-warning" onclick="submiCurrentRow(this)">提交</a>
+							      <a href="#myModal" data-toggle="modal-2" class="btn btn-danger" onclick="deleteCurrentRow(this)">删除</a>
+								 </td>
+                              </tr>
+							<tr>
+								 <td><div class="pic"><img src="/imgs/flowers/carnation.jpg"></div></td>
+								 <td>康乃馨</td>
+								 <td>20</td>
+								 <td>母亲我爱您、热情、真情</td>
+                                 <td>
+								  <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changePicture(this)">更改图片</a>
+							      <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changeCurrentRow(this)">修改</a>
+							      <a href="#myModal" data-toggle="modal-1" class="btn btn-warning" onclick="submiCurrentRow(this)">提交</a>
+							      <a href="#myModal" data-toggle="modal-2" class="btn btn-danger" onclick="deleteCurrentRow(this)">删除</a>
+								 </td>
+                              </tr>
+							  <tr>
+								 <td><div class="pic"><img src="/imgs/flowers/mimose.jpg"></div></td>
+								 <td>含羞草</td>
+								 <td>0</td>
+								 <td>知廉耻、敏感、礼貌</td>
+                                 <td>
+								  <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changePicture(this)">更改图片</a>
+							      <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changeCurrentRow(this)">修改</a>
+							      <a href="#myModal" data-toggle="modal-1" class="btn btn-warning" onclick="submiCurrentRow(this)">提交</a>
+							      <a href="#myModal" data-toggle="modal-2" class="btn btn-danger" onclick="deleteCurrentRow(this)">删除</a>
+								 </td>
+                              </tr>
+							  <tr>
+								 <td><div class="pic"><img src="/imgs/flowers/sunflower.jpg"></div></td>
+								 <td>向日葵</td>
+								 <td>0</td>
+								 <td>沉默的爱、爱慕、光辉、忠诚、无望的爱</td>
+                                 <td>
+								  <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changePicture(this)">更改图片</a>
+							      <a href="#myModal" data-toggle="modal" class="btn btn-primary" onclick="changeCurrentRow(this)">修改</a>
+							      <a href="#myModal" data-toggle="modal-1" class="btn btn-warning" onclick="submiCurrentRow(this)">提交</a>
+							      <a href="#myModal" data-toggle="modal-2" class="btn btn-danger" onclick="deleteCurrentRow(this)">删除</a>
+								 </td>
+                              </tr>
+                            </tbody>
+                          </table>
+						  </div>
+                      </section>
+                  </div>
+				</div> 
+
+			
+			
+			
+			<div class="btn-group" float:right>
+                <button type="button" class="btn btn-default" onclick="display('lb')">添加</button>
+                <button type="button" class="btn btn-default" >刷新</button>
+            </div>
+			<div class="col-lg-4" id="lb"  style="display:none">
+				<section class="panel">
+				<header class="panel-heading">
+					 添加商品
+				</header>
+				<div class="panel-body">
+					
+						<div class="form-group">
+							<label>商品名称</label>
+							<input class="form-control" id="productionName" placeholder="Enter name">
+						</div>
+						<div class="form-group">
+							<label>商品价格</label>
+							<input type="text" class="form-control" id="price">
+						</div>
+						<div class="form-group">
+							<label>商品含义</label>
+							<input type="text" class="form-control" id="means">
+						</div>
+						<div class="form-group">
+                            <label>商品图片</label>
+                            <input type="file" id="myfile">
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div>
+						
+						<button type="submit" class="btn btn-primary"  id = "sub1">Submit</button>
+					
+
+				</div>
+				</section>
+			</div>	
+
+              <!-- page end-->
+          </section>
+		  
+	<!-- End product image -->
+
+      </section>
+      <!--main content end-->
+  </section>
+  <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/js/jquery.scrollTo.min.js"></script>
+    <script src="/js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
+    <script src="/js/scripts.js"></script>
+	<script>
+	window.onload = function()
+	{  
+		 $.ajax({
+			type:"POST",  
+			url:"/getVirtualFlowers",//连接对应后台
+			dataType: "json", 
+			error:function(data){  
+				  alert("连接超时");  
+			  },  
+			  success:function(data){  
+				   $("#table").html("<tr><th>图片</th><th>名称</th><th>价格</th><th>含义</th><th>Action</th></tr> ");
+				   for( i in data){
+					   $("#table").append("<tr><td>"+"<div class=\"pic\"><img src = \"imgs\/flowers\/"+data[i].productionPhoto+"\"></div>"+
+							   "</td><td>"+data[i].productionName+
+							   "</td><td>"+data[i].price+
+							   "</td><td>"+data[i].means+
+							   "</td><td>"+
+							   "<a href=\"#myModal\" data-toggle=\"modal\" class=\"btn btn-primary\" onclick=\"changePicture(this)\">"+"更改图片"+"</a>"+
+							   "<a href=\"#myModal\" data-toggle=\"modal\" class=\"btn btn-primary\" onclick=\"changeCurrentRow(this)\">"+"修改"+"</a>"+
+							   "<a href=\"#myModal\" data-toggle=\"modal-1\" class=\"btn btn-warning\" onclick=\"submitCurrentRow(this)\">"+"提交"+"</a>"+
+							   "<a href=\"#myModal\" data-toggle=\"modal-2\" class=\"btn btn-danger\" onclick=\"deleteCurrentRow(this)\">"+"删除"+"</a>"+
+							   +"</td></tr>")
+					 }
+				  }  
+			  });
+	}//findall
+	</script>
+	<script type="text/javascript">
+		function changeCurrentRow(obj) {
+
+			//找到这一行的tr
+			var tr = obj.parentNode.parentNode;
+			//找到这一行的id
+			var id = obj.parentNode.parentNode.getElementsByTagName("td")[0].innerText;
+			//获取本行所有的td
+			var td = tr.getElementsByTagName("td");
+			//将这一行每个单元格变成输入框
+			for(var i=2;i<td.length-1; i++)
+			{
+			td[i].index = i;
+			
+			td[i].onclick = function () {
+            
+                var input = document.createElement("input");
+                input.type = "text";
+                input.className = "inputOne";
+                input.value = this.innerHTML;
+                td[this.index].innerHTML = "";
+                td[this.index].appendChild(input);
+                input.focus();
+                input.onblur = function () {
+                    this.parentNode.innerHTML = input.value;                                                            
+					input.remove();
+				}
+				
+			}
+			}
+			
+   
+        }
+
+	</script>
+	<script type="text/javascript">
+        function deleteCurrentRow(obj) {
+            var tr = obj.parentNode.parentNode;
+
+            var productionName = obj.parentNode.parentNode.getElementsByTagName("td")[1].innerText;//找到这一行的商品名称
+
+            var tbody = tr.parentNode;
+			var type = "虚拟鲜花";
+            if (window.confirm("是否确定删除？") == true) {
+                tbody.removeChild(tr);
+                //只剩行首时删除表格
+                if (tbody.rows.length == 0) {
+                    tbody.parentNode.removeChild(tbody);
+                }
+                //后台删除
+                $.ajax({
+                    type: "POST",
+                    url: "/deleteProduction",//连接对应后台 删除这个用户
+                    dataType: "json",
+					contentType: "application/json",
+                    data: JSON.stringify({"productionName": productionName,"type":type}),//用户id
+                    error: function (result) {
+                        alert("连接超时");
+                    },
+                    success: function (result) {
+                        alert("success");
+                    }
+                });
+            }
+        }
+    </script>
+
+<script type="text/javascript">
+	function submitCurrentRow(obj){
+	        //var productionPhoto = obj.parentNode.parentNode.getElementsByTagName("td")[0].innerText;
+			var productionName = obj.parentNode.parentNode.getElementsByTagName("td")[1].innerText;
+			var price = obj.parentNode.parentNode.getElementsByTagName("td")[2].innerText;
+			var means = obj.parentNode.parentNode.getElementsByTagName("td")[3].innerText;
+			var type = "虚拟鲜花";
+
+                $.ajax({
+                    type: "POST",
+                    url: "/updateProduction",//连接对应后台 更新这个用户
+                    contentType: "application/json",
+                    data: JSON.stringify({"productionName": productionName,"price":price,"means": means,"type":type}),//用户信息除照片外全部重传
+                    error: function (result) {
+                        alert("连接超时");
+                    },
+                    success: function (result) {
+                        alert("success");
+                    }
+                });
+	}
+
+    </script>  					
+<script type="text/javascript">
+    function display(id){  
+
+        var traget=document.getElementById(id);  
+
+        if(traget.style.display=="none"){  
+
+            traget.style.display="";  
+
+        }else{  
+
+            traget.style.display="none";  
+
+      }  
+
+   }  
+
+</script>
+
+<script type="text/javascript">
+
+document.getElementById('sub1').onclick = function(){
+
+ 
+  var c=document.getElementById('table');//获得表格的信息
+
+  //var t1 = c.rows.length;//获得表格有多少行
+  var i = $("#myfile")[0].files[0].name;
+  var t1 = "<img src = \"imgs\/flowers\/" + i +"\">";
+  var t2 = $("#productionName").val();
+  var t3 = $("#price").val();
+  var t4 = $("#means").val();
+  var type = "虚拟鲜花";
+
+
+  if ( c.rows.length==1)//如果是向一个空表增加一行
+  {
+  var x=c.insertRow(0);//向空表插入一行
+  var y1=x.insertCell(0);//向新行插入一列
+  var y2=x.insertCell(0);
+  var y3=x.insertCell(0);
+  y1.innerHTML="new cell0";
+  }
+  else {
+      var x = c.insertRow(-1);
+
+      //依次向新行插入表格列数的单元格12`
+      x.innerHTML = "<td>" +"<div class=\"pic\">"+t1+"</div>"+ "</td>";
+      x.innerHTML += "<td>" + t2 + "</td>";
+      x.innerHTML += "<td>" + t3 + "</td>";
+	  x.innerHTML += "<td>" + t4 + "</td>";
+	  x.innerHTML += "<td><a href=\"\#myModal\" data-toggle=\"modal\" class=\"btn btn-primary\" onclick=\"changePicture(this)\">"+"更改图片"+"</a>"+"<a href=\"\#myModal\" data-toggle=\"modal\" class=\"btn btn-primary\" onclick=\"changeCurrentRow(this)\">"+"修改"+"</a><a href=\"\#myModal\" data-toggle=\"modal-1\" class=\"btn btn-warning\" onclick=\"submiCurrentRow(this)\">"+"提交"+"</a>"+"<a href=\"\#myModal\" data-toggle=\"modal-2\" class=\"btn btn-danger\" onclick=\"deleteCurrentRow(this)\">"+"删除"+"</a></td>";
+}
+  
+  var user = new FormData();
+  user.append("productionPhoto",i);
+  user.append("productionName",t2);
+  user.append("price",t3);
+  user.append("means",t4);
+  user.append("type", type);
+//JSON.stringify({"productionPhoto":i,"productionName":t2,"price":t3,"means":t4,"type":type}),
+//"application/json"processData: false,
+   $.ajax({
+			type:"POST",
+			url:"/addProduction",//连接对应后台 增加这个用户
+            contentType: "application/json",
+			data: JSON.stringify({"productionPhoto":i,"productionName":t2,"price":t3,"means":t4,"type":type}),
+			error:function(result){
+              alert("连接超时");
+			},
+			success: function(result){
+                if(result)
+                  alert("success");
+                else
+                  alert("error");
+              }
+            });
+}
+</script>
+<script type="text/javascript">
+		function changePicture(obj) {
+		   
+		    var i = prompt("请输入新的照片名","\.jpg");
+
+			//找到这一行的tr
+			var tr = obj.parentNode.parentNode;
+			//找到这一行的id
+			var id = obj.parentNode.parentNode.getElementsByTagName("td")[0].innerText;
+			//获取本行照片
+			var td = tr.getElementsByTagName("td")[0];
+			var productionName = tr.getElementsByTagName("td")[1];
+			//将这一行每个单元格变成输入框
+			td.innerHTML ="<div class=\"pic\"><img src = \"imgs\/flowers\/" + i +"\"></div>";
+			
+			$.ajax({
+			type:"POST",
+			url:"/updateProductionPhoto",//连接对应后台 增加这个用户
+            contentType: "application/json",
+			dataType: "json",
+			data:JSON.stringify({"productionPhoto":i,"productionName":productionName}),
+			error:function(result){
+              alert("连接超时");
+			},
+			success:function(result){
+                alert("success");
+              }
+            });
+		
+			
+   
+        }
+
+	</script>
+  </body>
+</html>

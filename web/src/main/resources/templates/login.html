@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LogIn</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link type="text/css" rel="stylesheet" href="/css/main.css">
+    <style>
+      .fdb-block {
+        border-bottom: 1px solid var(--light);
+      }
+    </style>
+  </head>
+  <body>
+
+
+<!-- <section class="fdb-block p-2" id="navigator">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-md">
+      <button class="navbar-toggler mr-auto ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav0" aria-controls="navbarNav0" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+    </nav>
+  </div>
+</section> -->
+
+<script>
+  // var page = window.location.pathname.split('/')
+  // page = page[page.length - 1]
+
+  // var nav = document.querySelector('a[href="' + page + '"]')
+  // if (nav) {
+  //   nav.classList.add('active')
+  // }
+
+
+</script>
+
+    
+    
+    <!-- Forms 7 -->
+      <div class="fdb-block" style="background-image: url(/image/1.png);">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-7 col-xl-5 text-center">
+              <div class="fdb-box">
+                <div class="row">
+                  <div class="col">
+                    <h1>Log In</h1>
+                  </div>
+                </div>
+                <div class="tip" id="tip"></div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <input type="text" class="form-control" placeholder="Account" id="account">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <input type="password" class="form-control mb-1" placeholder="Password" id="password">
+                     <p class="text-right"><a href="/register">没有账号？注册一个</a></p>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <button class="btn btn-outline-secondary" type="button">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </body>
+  
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-cookie/1.3.0/jquery.cookie.js"></script>
+  <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://www.gongjuji.net/Content/files/jquery.md5.js"></script>
+
+  <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+  <!--<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
+  <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+  <script type="text/javascript">
+
+
+
+    // //账号检查
+    // function checkAccount(){
+    //       var xmlhttp = new XMLHttpRequest();//创建XHR XML Http Request
+    //       xmlhttp.open("GET",url,true);//设置并发出请求
+    //       xmlhttp.onreadystatechange=checkResult;//设置响应参数  在 给定函数checkResult函数中 处理响应
+          
+    // }
+    // function checkResult(){
+    //    if (xmlhttp.readyState==4 && xmlhttp.status==200)  
+    //  document.getElementById('checkResult').innerHTML=xmlhttp.responseText;//xmlhttp.readyState 4 表示请求已完成
+    //                                                                       //xmlhttp.status 200 表示响应成功
+    //                                                                         //xmlhttp.responseText; 用于获取服务端传回来的文本
+    //                                                                         //document.getElementById('checkResult').innerHTML 设置span的内容为服务端传递回来的文本
+    // }
+
+
+    // //提交
+    // function submit(){
+    //   // alert(Account.val());
+    // }
+
+    $(document).ready(function(){
+        $("button").click(function()
+        {
+            var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+            var user = new Object();
+
+            user.account = $.trim($("#account").val());
+            user.psd = $.trim($("#password").val());
+            user.psd=$.md5(user.psd);
+
+
+            if(!myreg.test($("#account").val())){
+                $("#tip").css("color","red");
+                $("#tip").html("手机号码格式不正确").show(300).delay(3000).hide(300);
+            }else if($('#password').val()==''){
+                $("#tip").css("color","red");
+                $("#tip").html("密码不能为空").show(300).delay(3000).hide(300);
+            }else {
+                $.ajax({
+                type: "POST",
+                url: "/checkUser",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(user),
+                success: function(result){
+                  if (result) {
+                      $.cookie("phoneNum",user.account);
+                      window.location.href = "/home";
+                  }
+                  else
+                    alert("用户名或密码错误！");
+                }
+              });
+
+            }//else
+
+          
+        })//click
+
+
+
+    })//ready
+  </script>
+</html>

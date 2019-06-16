@@ -1,0 +1,179 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Grocery Payment Widget Flat Responsive Widget Template :: w3layouts</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Grocery Payment Widget Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!-- js -->
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.3.0/jquery.cookie.js"></script>
+<!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<!--<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/js/creditly.js"></script>
+
+<script type="text/javascript">
+    var user = new Object();
+    user.phoneNum = $.cookie('phoneNum');
+    var phoneNum=user.phoneNum;
+    if (user.phoneNum==null)
+        window.location.replace("/login");
+
+    // var phoneNum=18899990004;
+
+    var price=$.cookie("price");
+    $("#price").append(price);
+    var paymethod=$.cookie("paymethod");
+
+    var obj=new Object();
+    obj.phoneNum=phoneNum;
+	
+    $(document).ready(function() {
+        var creditly = Creditly.initialize(
+            '.creditly-wrapper .expiration-month-and-year',
+            '.creditly-wrapper .credit-card-number',
+            '.creditly-wrapper .security-code',
+            '.creditly-wrapper .card-type');
+
+        $("button").click(function () {
+            if (paymethod == 3) {//充值
+                obj.cash = price;
+                $.ajax({
+                    type: "POST",
+                    url: "/addBud",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),
+                    success: function (result) {
+                        if (result) {
+                            alert("success");
+                            window.location.replace("/home");
+                        }
+                        else
+                            alert("error");
+                    }
+                });
+            } else if (paymethod == 2) {//虚拟
+
+            } else if (paymethod == 1) {//实体
+
+            } else if (paymethod == 4) {//提现
+                obj.corolla = price * 0.2;
+                $.ajax({
+                    type: "POST",
+                    url: "/addCash",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),
+                    success: function (result) {
+                        if (result) {
+                            alert("success");
+                            window.location.replace("/home");
+                        }
+                        else
+                            alert("error");
+                    }
+                });
+            } else if (paymethod == 5) {//花冠花芽兑换
+                obj.corolla = price;
+                $.ajax({
+                    type: "POST",
+                    url: "/addCorolla",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),
+                    success: function (result) {
+                        if (result) {
+                            alert("success");
+                            window.location.replace("/home");
+                        }
+                        else
+                            alert("error");
+                    }
+                });
+
+            }
+        })
+    })
+
+    $(function() {
+    	$("#price").append(price);
+    })
+</script>
+<!-- //js -->
+<link href="/css/style1.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="/css/creditly1.css" type="text/css" media="all" />
+<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="main">
+		<h1>Grocery Payment Widget</h1>
+		<div class="agileits_main_grid w3layouts_main w3_main_grid">
+			<div class="agileits_main_grid_right agileits_w3layouts_grid_right">
+				<h2>Total Price</h2>
+				<p id="price"></p>
+			</div>
+			<div class="agileits_main_grid_left w3l_main w3ls_main_grid_left">
+				<div class="agileits_main_grid_left1 agileits_main_grid_left1">
+					<div class="creditly-card-form agileinfo_form">
+						<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+							<div class="credit-card-wrapper">
+								<div class="first-row form-group">
+									<div class="controls">
+										<label class="control-label">Card Number</label>
+										<input class="number credit-card-number form-control" type="text" name="number"
+													  inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
+													  placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;">
+									</div>
+									<div class="controls">
+										<label class="control-label">CVV</label>
+										<input class="security-code form-control"Â·
+													  inputmode="numeric"
+													  type="text" name="security-code"
+													  placeholder="&#149;&#149;&#149;">
+									</div>
+								</div>
+								<div class="second-row form-group">
+									<div class="controls">
+										<label class="control-label">Name on Card</label>
+										<input class="billing-address-name form-control" type="text" name="name" placeholder="John Smith">
+									</div>
+									<div class="controls">
+										<label class="control-label">Expiration</label>
+										<input class="expiration-month-and-year form-control" type="text" name="expiration-month-and-year" placeholder="MM / YY">
+									</div>
+								</div>
+								<button class="submit"><span>Pay</span></button>
+							</div>
+						</section>
+						
+					</div>
+				</div>
+			</div>
+			<div class="clear"> </div>
+		</div>
+		<div class="agileits_copyright agile_copy">
+			<p class="w3_agile_right">© 2016 Grocery Payment Widget. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+		</div>
+	</div>
+</body>
+</html>

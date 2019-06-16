@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>change</title>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link type="text/css" rel="stylesheet" href="/css/main.css">
+
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-cookie/1.3.0/jquery.cookie.js"></script>
+  <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+  <!--<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
+  <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+  <script src="http://www.gongjuji.net/Content/files/jquery.md5.js"></script>
+
+
+
+
+</head>
+<body>
+
+<div class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-7 col-md-5 text-center">
+            <div class="fdb-box fdb-touch">
+              <div class="row">
+                <div class="col">
+                  <h2>修改信息</h2>
+                </div>
+              </div>
+              <div class="tip" id="tip"></div>
+              <div class="row">
+                <div class="col mt-4">
+                  <p align="left" style="color: #329ef7">昵称:<input type="text" class="form-control" id="nickname"></p>
+                </div>
+              </div>
+              <!--<div class="row mt-4">-->
+                <!--<div class="col">-->
+                  <!--<p align="left" style="color: #329ef7">手机号码：<input type="text" class="form-control" id="phone"></p>-->
+                <!--</div>-->
+              <!--</div>-->
+              <div class="row mt-4">
+                <div class="col">
+                  <p align="left" style="color: #329ef7">地址：<input type="text" class="form-control" id="address"></p>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <p align="left" style="color: #329ef7">个性签名：<input type="text" class="form-control" id="signature"></p>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <p align="left" style="color: #329ef7">密码：<input type="password" class="form-control mb-1" id="psd"></p>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <script type="text/javascript">
+        var user = new Object();
+        user.phoneNum = $.cookie('phoneNum');
+
+
+        if (user.phoneNum==null)
+            window.location.replace("/login");
+
+
+         $(document).ready(function(){
+                  $.ajax({
+                    url: "/getmypage",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(user),
+                    success: function(result){
+                        $("#nickname").val(result.username);
+                        // $("#phone").val(result.phoneNum);
+                        $("#address").val(result.address);
+                        $("#signature").val(result.signature);
+                        $("#psd").val(result.password);
+                                          }
+                  })
+    })
+
+
+
+
+
+    $("button").click(function()
+{
+        // var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        // var user = new FormData();
+        user.username=$.trim($("#nickname").val());
+        user.password=$.trim($("#psd").val());
+        user.password=$.md5(user.password);
+        // user.append("phoneNum", $.trim($("#phone").val()));
+        user.address=$.trim($("#address").val());
+        user.signature=$.trim($("#signature").val());
+
+      if ($("#nickname").val() == "") { 
+          $("#tip").css("color","red");
+          $("#tip").html("用户名不能为空").show(300).delay(3000).hide(300);
+      }else if($("#psd").val() == ""){
+          $("#tip").css("color","red");
+          $("#tip").html("密码不能为空").show(300).delay(3000).hide(300);
+      }else if($("#address").val() == ""){
+          $("#tip").css("color","red");
+          $("#tip").html("地址不能为空").show(300).delay(3000).hide(300);
+      }//else if(!myreg.test($("#phone").val())){
+      //     $("#tip").css("color","red");
+      //     $("#tip").html("手机号码格式不正确").show(300).delay(3000).hide(300);
+      // }
+          else if($("#nickname").val().length < 4 || $("#nickname").val().length > 16){
+          $("#tip").css("color","red");
+          $("#tip").html("用户名长度为4-16").show(300).delay(3000).hide(300);
+        }else if($("#psd").val()!==null&&($("#psd").val().length < 6 || $("#psd").val().length > 16)){
+            $("#tip").css("color","red");
+            $("#tip").html("密码长度为6-16位").show(300).delay(3000).hide(300);
+        }else{
+        $.ajax({
+              type: "POST",
+              url: "/updateUser",//可以增加一个修改的函数，不允许修改头像，仅仅修改文本信息，密码留空代表不修改密码，不为空则代表修改
+              dataType: "json",
+              contentType: "application/json",
+              data: JSON.stringify(user),
+              success: function(result){
+                if(!result.errorId) {
+                  alert("success");
+                  window.location.href="/mypage";
+                }else
+                  alert(result.errorMsg);
+              }
+          });
+      }
+  });
+
+  </script>
+</body>
+</html>

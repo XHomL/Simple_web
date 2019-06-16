@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>itemControl</title>
+    <link rel="stylesheet" type="text/css" href="/css/shopcart.css">
+    <link href="/css/layui.css" rel="stylesheet" type="text/css">
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+ 
+    
+    
+
+   <script type="text/javascript" src="/js/layui.js"></script>
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-cookie/1.3.0/jquery.cookie.js"></script>
+<style type="text/css">
+
+
+  body {
+    background-color: white;
+  }
+  
+
+  
+  
+  
+
+
+
+
+
+
+
+
+</style>
+
+
+    
+<body>   
+  <!-- 更改了 link aui.2.0 名称 -->
+  <!-- 添加了 ajax 获取 个人信息 -->
+
+
+
+
+  <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-md">
+          
+    
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarNav3">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/home" style="font-size: 17px;font-family: 微软雅黑;margin-right: 5px;">主页 <span class="sr-only">(current)</span></a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/itemControl" style="font-size: 17px;font-family: 微软雅黑">我的订单</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/mypage" style="font-size: 17px;font-family: 微软雅黑">我的</a>
+              </li>
+            </ul>
+    
+            <a class="btn btn-outline-primary ml-md-3" href="/login" style="font-size: 17px;font-family: 微软雅黑">退出登录</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+
+<div class="content content-nav-base shopcart-content">
+    
+    <div class="cart w1200">
+      <div class="cart-table-th">
+        <div class="th th-chk">
+          <div class="select-all">
+            <div class="cart-checkbox">
+              <!-- <input class="check-all check" id="allCheckked" type="checkbox" value="true"> -->
+            </div>
+          <!-- <label>&nbsp;&nbsp;全选</label> -->
+          </div>
+        </div>
+        <div class="th th-item">
+          <!-- <span style="left: 50px;position: absolute;"><a href="">虚拟</a>/<a href="">实体</a>礼物</span> -->
+          <select name="kindOfGift" style="left: 50px;position: absolute;font-size: 14px;font-family: 微软雅黑;margin-top: 15px;">
+            <option value="real" selected="selected">实体礼物</option>
+            <option value="virtual">虚拟礼物</option>
+          </select>
+          
+          <div class="th-inner">
+            商品
+          </div>
+        </div>
+        <div class="th th-price">
+          <div class="th-inner">
+            单价
+          </div>
+        </div>
+        <div class="th th-amount">
+          <div class="th-inner">
+            数量
+          </div>
+        </div>
+        <div class="th th-sum">
+          <div class="th-inner">
+            小计
+          </div>
+        </div>
+        <div class="th th-op">
+          <!-- <div class="th-inner">
+            操作
+          </div> -->
+        </div>  
+      </div>
+      <div class="OrderList">
+        <div class="order-content" id="list-cont">
+
+        </div>
+      </div>
+
+
+
+      <div class="FloatBarHolder layui-clear">
+        <div class="th th-chk">
+          <div class="select-all">
+            <div class="cart-checkbox">
+              <!-- <input class="check-all check" id="" name="select-all" type="checkbox"  value="true"> -->
+            </div>
+            <label>&nbsp;&nbsp;已选<span class="Selected-pieces" id="totalNum">0</span>件</label>
+          </div>
+        </div>
+        <!-- <div class="th batch-deletion">
+          <span class="batch-dele-btn">批量删除</span>
+        </div> -->
+        <div class="th Settlement">
+          <!-- <input type="text" name="" id="giveTo"><span id="isUserExist"></span> -->
+          <button class="layui-btn" id="submitOrder" >提交订单</button>
+        </div>
+        <div class="th total">
+          <p>总金额 ：<span class="pieces-total" id="totalMoney">0</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var itemNum;//商品数量 
+    var totalMoney = 0;//总金额
+    var totalNum = 0;//商品总数量
+    var targetId = $.cookie("thatuser");//送礼目标userId
+      var userId = $.cookie("phoneNum");//用户Id
+    //   var userId = 18899990005;//测试用
+    // var targetId = 18899990004;//测试用
+
+
+
+    var item_num = [];//记录每个商品数量的数组
+    var item_price_arr = [];//查询时记录每个商品单价
+    var item_id_arr = [];//传输数据时已购的商品id
+    var itemId = [];//在查询商品时记录每个商品id的数组
+      var Num;
+    var order = new Object();//订单对象
+
+    // var phoneNum = $.cookie("phoneNum");
+    order.phoneNum = userId;//送礼人用户名
+    order.targetId = targetId;//目标人id
+
+
+    var gainGiftListUrl;//获取 虚拟or实体礼物信息的url
+    var postOrderUrl;//向后台传输 订单的 url
+
+$('select').change(function () {
+    var kindOfGift = $('select').val();
+    // alert(kindOfGift);
+    if(kindOfGift == "real"){
+        gainGiftListUrl = "/getReal";//实体礼物url
+        // gainFlowerListUrl = "http://192.168.43.142:8080/getRealFlowers";
+        postOrderUrl =  "/addRealProduction";//实体礼物订单url
+    }
+    else if(kindOfGift == "virtual"){
+        gainGiftListUrl = "/getVirtual";//虚拟礼物url
+        postOrderUrl =  "/addVirtualProduction";//虚拟礼物订单url
+    }
+    itemId.splice(0,itemId.length);
+    item_price_arr.splice(0,item_price_arr.length);
+    //从数据库获取商品名称
+    $.ajax({
+        url: gainGiftListUrl,
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        success: function(result){
+            itemNum = result.length;//获取商品数量
+
+            $('#list-cont').html("");
+            // alert("success");
+            for(var i = 0;i<result.length;i++){
+                $('#list-cont').append(
+                    "<ul class=\"item-content layui-clear\">"+
+                    "<li class=\"th th-chk\">"+
+                    "<div class=\"select-all\">"+
+                    "<div class=\"cart-checkbox\">"+
+
+                    "</div>"+
+                    "</div>"+
+                    "</li>"+
+                    "<li class=\"th th-item\">"+
+                    "<div class=\"item-cont\">"+
+                    "<a href=\"javascript:;\"><img src=\""+"/upload/"+result[i].productionPhoto+"\" alt=\"\"></a>"+//商品图片
+                    "<div class=\"text\">"+
+                    "<div class=\"title\">"+result[i].productionName+"</div>"+//商品名称
+                    "</div>"+
+                    "</div>"+
+                    "</li>"+
+                    "<li class=\"th th-price\">"+
+                    "<span class=\"th-su\" id=\"onePrice\">"+result[i].price+"</span>"+//商品价格
+                    "</li>"+
+                    "<li class=\"th th-amount\">"+
+                    "<div class=\"box-btn layui-clear\">"+
+                    "<div class=\"less layui-btn\" id=\"minus_item\">-</div>"+//减少数量
+                    "<input class=\"Quantity-input\" type=\"\" name=\"\" value=\"0\" disabled=\"disabled\" id=\""+i+"Num\">"+
+                    "<div class=\"add layui-btn\" id=\"add_item\">+</div>"+//增加数量
+                    "</div>"+
+                    "</li>"+
+                    "<li class=\"th th-sum\">"+
+                    "<span class=\"sum\" id=\"categoryPrice\">0</span>"+//小计数量
+                    "</li>"+
+
+                    "</ul>"
+                )//append
+
+
+                itemId.push(result[i].productionId);//记录商品id
+                item_price_arr.push(result[i].price);//每个商品单价
+
+
+            }//for
+
+
+
+
+
+
+
+        }
+    });//ajax
+
+
+})
+    var kindOfGift = $('select').val();
+    // alert(kindOfGift);
+    if(kindOfGift == "real"){
+      gainGiftListUrl = "/getReal";//实体礼物url
+        // gainFlowerListUrl = "http://192.168.43.142:8080/getRealFlowers";
+      postOrderUrl =  "/addRealProduction";//实体礼物订单url
+    }
+    else if(kindOfGift == "virtual"){
+      gainGiftListUrl = "/getVirtual";//虚拟礼物url
+      postOrderUrl =  "/addVirtualProduction";//虚拟礼物订单url
+    }
+
+      //从数据库获取商品名称
+     $.ajax({
+          url: gainGiftListUrl,
+                    type: "POST",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function(result){
+                      itemNum = result.length;//获取商品数量
+
+
+                        // alert("success");
+                        for(var i = 0;i<result.length;i++){
+                          $('#list-cont').append(
+                            "<ul class=\"item-content layui-clear\">"+
+            "<li class=\"th th-chk\">"+
+              "<div class=\"select-all\">"+
+                "<div class=\"cart-checkbox\">"+
+
+                "</div>"+
+              "</div>"+
+            "</li>"+
+            "<li class=\"th th-item\">"+
+              "<div class=\"item-cont\">"+
+                "<a href=\"javascript:;\"><img src=\""+"/upload/"+result[i].productionPhoto+"\" alt=\"\"></a>"+//商品图片
+                "<div class=\"text\">"+
+                  "<div class=\"title\">"+result[i].productionName+"</div>"+//商品名称
+                "</div>"+
+              "</div>"+
+            "</li>"+
+            "<li class=\"th th-price\">"+
+              "<span class=\"th-su\" id=\"onePrice\">"+result[i].price+"</span>"+//商品价格
+            "</li>"+
+            "<li class=\"th th-amount\">"+
+              "<div class=\"box-btn layui-clear\">"+
+                "<div class=\"less layui-btn\" id=\"minus_item\">-</div>"+//减少数量
+                "<input class=\"Quantity-input\" type=\"\" name=\"\" value=\"0\" disabled=\"disabled\" id=\""+i+"Num\">"+
+                "<div class=\"add layui-btn\" id=\"add_item\">+</div>"+//增加数量
+              "</div>"+
+            "</li>"+
+            "<li class=\"th th-sum\">"+
+              "<span class=\"sum\" id=\"categoryPrice\">0</span>"+//小计数量
+            "</li>"+
+
+          "</ul>"
+                           )//append
+
+
+                          itemId.push(result[i].productionId);//记录商品id
+                          item_price_arr.push(result[i].price);//每个商品单价
+
+
+                        }//for
+
+
+
+
+
+
+
+                      }
+        });//ajax
+     
+     
+
+     $(document).on('click','#minus_item',function(){//减
+      var cur_num = $(this).next().val();//当前商品数量
+      if(cur_num > 0){
+        $(this).next().val(parseInt(cur_num)-1);
+       var onePrice = $(this).parent().parent().parent().find('#onePrice').text();
+        
+        var num = $(this).next().val();
+        $(this).parents().find('#categoryPrice').html(parseInt(onePrice)*parseInt(num));
+
+        totalMoney = parseInt(totalMoney)-parseInt(onePrice);
+        $('#totalMoney').html(totalMoney);
+        totalNum--;
+      $('#totalNum').html(totalNum);
+     }
+
+     })
+
+     $(document).on('click','#add_item',function(){//加
+      
+          $(this).prev().val(parseInt($(this).prev().val())+1);
+         
+         var onePrice = $(this).parent().parent().parent().find('#onePrice').text();
+        
+        
+          
+          var num = $(this).prev().val();
+          // console.log($(this).parents().find('#onePrice').html());
+        $(this).parent().parent().parent().find('#categoryPrice').html(parseInt(onePrice)*parseInt(num));
+
+        totalMoney = parseInt(totalMoney)+parseInt(onePrice);
+          $('#totalMoney').html(totalMoney);
+        totalNum++;
+        $('#totalNum').html(totalNum);
+
+        
+     })
+
+    // for(var i=0;i<itemNum;i++){//总金额
+    //   var price = $('#price'+i).text();
+    //   totalMoney = parseInt(price)+parseInt(totalMoney);
+
+    //   var num = $('#'+i+'num').val();
+    //   totalNum = parseInt(num)+parseInt(totalNum);
+    //  }
+    //  $('#totalMoney').html(totalMoney);
+    //  $('#totalNum').html(totalNum);
+
+
+
+     $('#submitOrder').click(function(){//提交订单
+      // var giveTo = $('#giveTo').val();
+      // if()
+      var itemPriceArr = [];
+      for(var i = 0;i<itemNum;i++){//创建要购买商品id数组item_id_arr 商品数量数组item_num
+        Num = parseInt($('#'+i+'Num').val());
+        // alert(Num);
+        // console.log(num);
+        if(Num != 0){
+          item_id_arr.push(itemId[i]);
+          item_num.push(Num);
+          // alert(item_num);
+          //   item_num.push(1);//测试用
+          itemPriceArr.push(item_price_arr[i]);
+
+        }
+        // console.log(item_id_arr);
+        // console.log(item_num);
+        // console.log(itemPriceArr);
+        order.itemArr = item_id_arr;//商品id数组
+        order.numArr = item_num;//数量数组
+        order.priceArr = itemPriceArr;//单价数组
+
+
+          // console.log(order.itemArr);
+          // console.log(order.numArr);
+          // console.log(order.priceArr);
+
+
+
+
+      }//for
+
+
+
+      $.ajax({//向后台传订单数组
+                    type : "POST",
+                    url : postOrderUrl,
+                    contentType: "application/json",
+                    data:JSON.stringify(order),
+                    dataType : 'json',
+                    success : function(data) {
+                     // alert(data.msg);
+                        if(data.errorId){
+                            alert(data.errorMsg);
+                        }
+                      window.location.href = "/orderList";
+
+                    }
+
+
+
+      });//ajax
+
+     })
+
+//总金额  和   已选件数
+     // function changeTotalMoney(){
+
+     //  for(var i = 0;i<itemNum;i++){
+     //    totalMoney
+     //  }
+     //  $('#totalMoney').html();
+     // }
+     // function changeItemNum(){
+
+     // }
+
+
+
+
+
+
+
+  })
+  
+
+
+
+</script>
+  </body>
+
+
+</html>

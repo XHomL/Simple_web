@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link type="text/css" rel="stylesheet" href="/css/main.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>  
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">  
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+      
+    <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>  
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">  
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="http://www.gongjuji.net/Content/files/jquery.md5.js"></script>
+
+
+</head>
+<body>
+
+<div class="fdb-block">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-7 col-md-5 text-center">
+            <div class="fdb-box fdb-touch">
+              <div class="row">
+                <div class="col">
+                  <h1>Register</h1>
+                </div>
+              </div>
+              <div class="tip" id="tip"></div>
+              <div class="row">
+                <div class="col mt-4">
+                  <input type="text" class="form-control" placeholder="Name" id="nickname">
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input name="sex" type="radio" value="man" checked="checked"/>男
+
+                  <input name="sex" type="radio" value="woman"/>女
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="file" class="form-control" name="File" id="file" multiple>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="True Name" id="name">
+                </div>
+              </div>
+               <div class="row">
+                <div class="col mt-4 input-group datepicker date" id='date1'>
+                  <input type="text" placeholder="Birthday" class="form-control" id="date">
+                  <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+              </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Phone Number" id="phone">
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Address" id="address">
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Signature" id="signature">
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <input type="password" class="form-control mb-1" placeholder="Password" id="psd">
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <p class="bom-text">已阅读并同意以下协议，<span>接受免除或者限制责任，诉讼管辖约定</span>等粗体下划线标示条款，愿意同步创建本站账户。<a href="#" target="_blank">《用户协议》</a><a href="#" target="_blank">《隐私声明》</a></p>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <script type="text/javascript">
+    $(function () {  
+    $('#date1').datetimepicker({  
+        format: 'YYYY-MM-DD',  
+        locale: moment.locale('zh-cn')  
+    }); 
+    $('#date1').datetimepicker('show');
+    }); 
+
+  $(document).ready(function(){
+    var date=new Date();//创建日期对象
+    var year=date.getFullYear();//获取当前年份
+    for(var i=year-100;i<=year;i++){//在id为year的selector附加option选项
+        $("#year").append("<option value=\""+i+"\">"+i+"</option>");//append函数附加html到元素结尾处
+    }
+    for(var i=1;i<=12;i++){
+        $("#month").append("<option value=\""+i+"\">"+i+"</option>");//为Id为month的selector附加option选项
+    }
+    getDays($("#month").val(),$("#year").val());//执行函数getDays()，传参year和month，初始化day selector
+
+    $("button").click(function()
+{
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        var user = new FormData();
+        var psd=$.md5($("#psd").val());
+        user.append("username", $.trim($("#nickname").val()));
+        user.append("password", $.trim(psd));
+        user.append("realName", $.trim($("#name").val()));
+        user.append("phoneNum", $.trim($("#phone").val()));
+        user.append("address", $.trim($("#address").val()));
+        user.append("signature", $.trim($("#signature").val()));
+        user.append("sex", $('input[type=radio][name=sex]:checked').val());
+        user.append("birthday", $.trim($("#date").val()));
+        user.append("profile", $("#file")[0].files[0]);
+
+
+      if ($("#nickname").val() == "") { 
+          $("#tip").css("color","red");
+          $("#tip").html("用户名不能为空").show(300).delay(3000).hide(300);
+      }else if($("#psd").val() == ""){
+          $("#tip").css("color","red");
+          $("#tip").html("密码不能为空").show(300).delay(3000).hide(300);
+      }else if($("#name").val() == ""){
+          $("#tip").css("color","red");
+          $("#tip").html("姓名不能为空").show(300).delay(3000).hide(300);
+      }else if($("#signature").val() == ""){
+          $("#tip").css("color","red");
+          $("#tip").html("个性签名不能为空").show(300).delay(3000).hide(300);
+      }else if($("#address").val() == ""){
+          $("#tip").css("color","red");
+          $("#tip").html("地址不能为空").show(300).delay(3000).hide(300);
+      }else if(!myreg.test($("#phone").val())){
+          $("#tip").css("color","red");
+          $("#tip").html("手机号码格式不正确").show(300).delay(3000).hide(300);
+      }else if($("#nickname").val().length < 4 || $("#nickname").val().length > 16){
+          $("#tip").css("color","red");
+          $("#tip").html("用户名长度为4-16").show(300).delay(3000).hide(300);
+      }else if($("#psd").val().length < 6 || $("#psd").val().length > 16){
+          $("#tip").css("color","red");
+          $("#tip").html("密码长度为6-16位").show(300).delay(3000).hide(300);
+      }else{
+        $.ajax({
+              type: "POST",
+              url: "/register",
+              processData: false,
+              contentType: false,
+              data: user,
+              success: function(result){
+                if(result)
+                  alert("success");
+                else
+                  alert("error");
+              }
+          });
+      }
+  });
+  });
+
+                function getDaysInMonth(month,year){//年月对应的日数算法
+                var days;
+                if (month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) {
+                days=31;//固定31
+                }else if (month==4 || month==6 || month==9 || month==11){
+                days=30;//固定30
+                }else{
+                if ((year%4 == 0 && year%100 != 0) || (year%400 == 0)) {     //排除百年，每四年一闰；每四百年一闰；
+                days=29; //闰年29
+                }else { 
+                days=28; //平年28
+                }
+                }
+                return days;//返回该年月的日数
+            }
+            function getDays(){
+                var year = $("#year").val();//year selector onchange="getDays()"动态获取用户选择的year值
+                var month = $("#month").val();//month selector onchange="getDays()"动态获取用户选择的month值
+                var days = getDaysInMonth(month,year);//调用算法函数计算对应年月的日数
+                $("#day").empty();//调用empty()函数清空day selector options，然后再append函数往day selector添加options
+                for(var i=1;i<=days;i++){
+                $("#day").append("<option value=\""+i+"\">"+i+"</option>");
+                }
+            }
+  </script>
+</body>
+</html>
